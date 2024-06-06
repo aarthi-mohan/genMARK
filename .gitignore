@@ -1,0 +1,3 @@
+#don't upload any of these files to git
+notebooks/redcap/*.*sv
+config/samples_internal.tsv
