@@ -1,0 +1,14 @@
+$schema: "http://json-schema.org/draft-06/schema#"
+
+description: an entry in the sample sheet
+properties:
+  sampleID:
+    type: string
+    description: sample identifier from TCAG
+  GVCF:
+    type: string
+    description: Path to DRAGEN called GVCF files
+
+required:
+  - sampleID
+  - GVCF

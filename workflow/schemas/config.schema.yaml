@@ -1,0 +1,46 @@
+$schema: "http://json-schema.org/draft-06/schema#"
+
+description: snakemake configuration file
+
+type: object
+properties:
+  project:
+    type: string
+  samples:
+    type: string
+  units:
+    type: string
+  genomicsdb:
+    type: string
+  ref:
+    type: object
+    properties:
+      fasta:
+        type: string
+      fai:
+        type: string
+      dict:
+        type: string
+      required:
+        - fasta
+        - fai
+        - dict
+  tools:
+    type: object
+    properties:
+      gatk: 
+        type: object
+        properties:
+          genomicsdb:
+            type: object
+            properties:
+              java:
+                type: string
+              extra:
+                type: string
+required:
+  - project
+  - samples
+  - genomicsdb
+  - ref
+  - tools

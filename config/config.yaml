@@ -1,0 +1,28 @@
+project: "genmark"
+samples: config/samples.tsv
+# units: config/units.tsv
+genomicsdb: "create" #options: create or update
+
+#use GRCh38 from TCAG
+ref:
+  fasta: "/hpf/largeprojects/ccmbio/aarthi/genomes/TCAG/hg38.fa"
+  fai: "/hpf/largeprojects/ccmbio/aarthi/genomes/TCAG/hg38.fa.fai"
+  dict: "/hpf/largeprojects/ccmbio/aarthi/genomes/TCAG/hg38.fa.dict"
+
+tools:
+  gatk:
+    genomicsdb:
+      java: "--java-options '-Xmx84g -Xms84g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true'"
+      extra: "--genomicsdb-shared-posixfs-optimizations --batch-size 50"
+  genotypegvcf:
+    java: "--java-options '-Xmx84g -Xms84g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true'"
+    extra: "--genomicsdb-shared-posixfs-optimizations true "
+  plink:
+    params: "--aec "
+    qc: "--missing --het --freq --hwe"
+    g1k_bed: /hpf/largeprojects/ccmbio/aarthi/genomes/ancestry-g1k/1kg_merged_pruned.bed #1000 Genomes variants converted to Plink1.9 format; see /hpf/largeprojects/ccmbio/aarthi/genomes/ancestry-g1k/README
+    g1k_pop: /hpf/largeprojects/ccmbio/aarthi/genomes/ancestry-g1k/20130606_g1k_pop_superpop.tsv
+  somalier:
+    sites: /hpf/largeprojects/ccmbio/aarthi/genomes/somalier/sites.hg38.vcf.gz
+    anc_labels: /hpf/largeprojects/ccmbio/aarthi/genomes/somalier/ancestry-labels-1kg.tsv
+    g1k_somalier: /hpf/largeprojects/ccmbio/aarthi/genomes/somalier/1kg-somalier/*.somalier
