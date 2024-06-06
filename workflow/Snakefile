@@ -1,0 +1,16 @@
+from snakemake.utils import min_version
+
+##### set minimum snakemake version #####
+min_version("8.11.0")
+
+configfile: "config/config.yaml"
+
+
+##### load rules #####
+include: "rules/common.smk"
+include: "rules/joint-calling.smk"
+
+
+##### target rules #####
+rule all:
+    input: directory(expand("genotyping/genomicsdb/genmark_chr{chrom}",chrom=chrom_list)),
