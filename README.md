@@ -1,4 +1,4 @@
-Pipeline to perform WGS joint-calling, annotation, and GWAS for the genMARK project.
+Snakemake based pipeline to perform WGS joint-calling, annotation, and GWAS for the genMARK project.
 
 Input: TSV file with sampleID, path to GVCF files 
 
@@ -32,7 +32,8 @@ Input: TSV file with sampleID, path to GVCF files
 4. use the "run pipeline" in `workflow/genmark.sh` to submit jobs.
 
 ## Folder description
-data: folder with test data
-workflow: main folder with rules, wrappers, Snakefile, envs, and dependent scripts.
-notebooks: Jupyter notebook used for REDCap files (input csv files should not be uploaded to github and listed in .gitignore; )
+- config: Snakemake config files
+- data: folder with test data
+- workflow: main folder with rules, wrappers, Snakefile, envs, and dependent scripts.
+- notebooks: Jupyter notebook used for REDCap files (input csv files should not be uploaded to github and listed in .gitignore; )
 
