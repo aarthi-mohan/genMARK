@@ -3,9 +3,9 @@ rule genomics_db_import:
     input:
         sample_map = config['samples']
     output:
-        db = directory(expand("genotyping/genomicsdb/{project}_chr{chrom}",project=config['project'], chrom=chrom_list))
+        db = directory("genotyped/genomicsdb/{project}_chr{chrom}")
     log:
-        expand("logs/gatk/genomicsdbimport_{chrom}.log",chrom=chrom_list)
+        "logs/gatk/genomicsdbimport_{project}_{chrom}.log"
     params:
         db_action = config['genomicsdb'],
         extra = config['tools']['gatk']['genomicsdb']['extra'],  
