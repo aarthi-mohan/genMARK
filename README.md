@@ -2,7 +2,7 @@ Snakemake based pipeline to perform WGS joint-calling, annotation, and GWAS for 
 
 Input: TSV file with sampleID, path to GVCF files 
 
-## Worklow: 
+## Worklow
 1. Combine GVCFs (genomicsdb) 
 2. Joint-genotype (GenotypeGVCF)
 3. Filter variants on qual and depth
@@ -16,14 +16,17 @@ Input: TSV file with sampleID, path to GVCF files
 
 
 
-## Installation:
+## Installation
 
 1. Download and install mamba
 2. mamba create -c conda-forge -c bioconda -n snakemake8.11 snakemake=8.11.3
 3. mamba activate snakemake8.11
-4. git clone this repo
-5. make a directory with more space to create tool-sepcific conda environments
-6. Edit the paths in genmark.sh according to your system; run the code listed as 1 and 2 for testing and setup 
+4. Install executor plugins required for slurm submission:
+    4.1. pip install snakemake-executor-plugin-slurm
+    4.2. pip install snakemake-storage-plugin-fs
+5. git clone this repo
+6. make a directory with more space to create tool-sepcific conda environments
+7. Edit the paths in genmark.sh according to your system; run the code listed as 1 and 2 for testing and setup 
 
 ## Running the pipeline (this is not tested yet!)
 1. Add the input sampleid, gvcf paths to `config/samples.tsv`

@@ -1,0 +1,6 @@
+executor: slurm
+latency-wait: 60
+default-storage-provider: fs
+jobs: 20
+remote-job-local-storage-prefix: "$SCRATCH"
+
