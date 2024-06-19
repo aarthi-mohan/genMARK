@@ -14,7 +14,7 @@ wildcard_constraints:
     sample = "|".join(samples.index),
     project = config['project']
 
-chrom_list= list(range(1,23)) + ["X", "Y", "MT"]
+chrom_list= [ "chr"+str(i) for i in list(range(1,23)) + ["X", "Y", "MT"]]
 
 def get_wrapper_path(*dirs):
     return "file:%s" % os.path.join(workflow.basedir, "wrappers", *dirs)
