@@ -1,5 +1,7 @@
 Snakemake based pipeline to perform WGS joint-calling, annotation, and GWAS for the genMARK project. Pipeline takes GVCFs as inputs; does not perform mapping, individual variant calling (haplotyper). 
 
+[![Snakemake](https://img.shields.io/badge/snakemake-%E2%89%A58.11.3-brightgreen.svg?style=flat)](https://snakemake.github.io/) [![GATK](https://img.shields.io/badge/gatk-%E2%89%A54.4-blue.svg?style=flat)](https://github.com/broadinstitute/gatk)
+
 Input: TSV file with sampleID, path to GVCF files 
 
 ## Worklow
