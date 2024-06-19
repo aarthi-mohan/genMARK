@@ -12,11 +12,11 @@ ref:
 tools:
   gatk:
     genomicsdb:
-      java: "--java-options '-Xmx84g -Xms84g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true'"
+      java: "-Xmx84g -Xms84g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true"
       extra: "--genomicsdb-shared-posixfs-optimizations --batch-size 50"
-  genotypegvcf:
-    java: "--java-options '-Xmx84g -Xms84g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true'"
-    extra: "--genomicsdb-shared-posixfs-optimizations true "
+    genotypegvcf:
+      java: "-Xmx84g -Xms84g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true"
+      extra: "--genomicsdb-shared-posixfs-optimizations true "
   plink:
     params: "--aec "
     qc: "--missing --het --freq --hwe"
