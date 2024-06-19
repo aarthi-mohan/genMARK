@@ -1,6 +1,30 @@
 executor: slurm
-latency-wait: 60
-default-storage-provider: fs
 jobs: 20
-remote-job-local-storage-prefix: "$SCRATCH"
+latency-wait: 100
+rerun-incomplete: True
+printshellcmds: True
+use-conda: True
+retries: 0
+remote-job-local-storage-prefix: "/localhd/$SLURM_JOB_ID"
+
+default-resources:
+  - slurm_account="ccm"
+  - runtime=240
+  - mem_mb=6000
+  - cpus_per_task=1
+  - nodes=1
+
+#rule specific resources; best practice is to put these in here than in rule:
+set-resources:
+    genomics_db_import:
+      runtime: 1440 # 1 hour
+      slurm_extra: "'--tmp=40G'"
+      mem_mb: 100000
+      cpus_per_task: 12
+    genotype_gvcf:
+      runtime: 1440 # 1 hour
+      slurm_extra: "'--tmp=40G'"
+      mem_mb: 100000
+
+
 
