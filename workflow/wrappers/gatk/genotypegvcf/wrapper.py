@@ -7,17 +7,17 @@ __license__ = "MIT"
 import os
 import tempfile
 from snakemake.shell import shell
-from snakemake_wrapper_utils.java import get_java_opts
 
 
 extra = snakemake.params.get("extra", "")
-java_opts = get_java_opts(snakemake)
+java_opts = snakemake.params.get("java_opts","")
 
-intervals = snakemake.input.get("intervals", "")
-if not intervals:
-    intervals = snakemake.params.get("intervals", "")
-if intervals:
-    intervals = "--intervals {}".format(intervals)
+if java_opts:
+    java_opts = "--java-options '{}' ".format(java_opts)
+
+interval = snakemake.params.get("intervals", "")
+if not interval.startswith("chr"):
+    interval = "chr" + interval
 
 dbsnp = snakemake.input.get("known", "")
 if dbsnp:
@@ -41,13 +41,13 @@ log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
 with tempfile.TemporaryDirectory() as tmpdir:
     shell(
-        "gatk --java-options '{java_opts}' GenotypeGVCFs"
+        "gatk {java_opts} GenotypeGVCFs"
         " --variant {input_string}"
         " --reference {snakemake.input.ref}"
         " {dbsnp}"
-        " {intervals}"
+        " -L {interval}"
         " {extra}"
-        " --tmp-dir {tmpdir}"
+        " --tmp-dir {snakemake.resources.tmpdir}"
         " --output {snakemake.output.vcf}"
         " {log}"
     )

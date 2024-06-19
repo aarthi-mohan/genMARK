@@ -4,15 +4,19 @@ __license__ = "MIT"
 
 
 import os
-
 from snakemake.shell import shell
-from snakemake_wrapper_utils.java import get_java_opts
 
 
 extra = snakemake.params.get("extra", "")
-java_opts = get_java_opts(snakemake)
+java_opts = snakemake.params.get("java_opts", "")
 
-# gvcfs = list(map("--variant {}".format, snakemake.input.gvcfs))
+if java_opts:   
+    java_opts = '--java-options "{}"'.format(java_opts)
+    
+interval = snakemake.params.get("intervals")
+if not interval.startswith("chr"):
+    interval = "chr" + interval
+
 
 db_action = snakemake.params.get("db_action", "create")
 if db_action == "create":
@@ -27,9 +31,12 @@ else:
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
 shell(
-    "gatk --java-options '{java_opts}' GenomicsDBImport {extra} "
-    "--sample-name-map {input.sample_map} "
-    "--intervals {snakemake.params.intervals} "
-    "-tmp-dir $SCRATCH"
-    "{db_action} {snakemake.output.db} {log} "
+    "set +u; "
+    "gatk {java_opts} GenomicsDBImport"
+    " --reader-threads {snakemake.threads}"
+    " --tmp-dir {snakemake.resources.tmpdir}"
+    " {extra}"
+    " --sample-name-map {snakemake.input}"
+    " --intervals {interval}"
+    " {db_action} {snakemake.output.db} {log}"
 )
